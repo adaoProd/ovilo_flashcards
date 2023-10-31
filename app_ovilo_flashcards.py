@@ -54,7 +54,6 @@ def main():
         # st.write(page_map[page].present())
         st.markdown("## Flashcard game")
         st.button("Draw new card")
-        st.text_input("Write the answer")
 
         # if st.button("Draw card") or card_selected != -1:
         card = flashcards.sample(n=1)
@@ -63,6 +62,7 @@ def main():
         side_one = card.iloc[0, random_0_1]
         with st.expander(side_one):
             st.write(card)
+            st.text_input("Write the answer - to remember")
 
         st.write("## Flashcard set loaded")
         st.write(flashcards)
