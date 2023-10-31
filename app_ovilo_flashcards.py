@@ -18,7 +18,9 @@ def read_flashcards_from_gs(gs_id="1ZCnJV1Lt_nD_nWTukv7u0tjOIFJbSse3fu-Jk4u8fOQ"
     with st.spinner(f"Loading s/s from Google Sheets:"):
         url = f"http://docs.google.com/spreadsheets/d/{gs_id}/gviz/tq?tqx=out:csv"
         df = pd.read_csv(url)
-        df.dropna(axis=0, how="any", inplace=True)
+        df.dropna(
+            axis=0, how="any", inplace=True, subset=["dutch_word", "english_word"]
+        )
 
     return df
 
@@ -56,13 +58,15 @@ def main():
         st.button("Draw new card")
 
         # if st.button("Draw card") or card_selected != -1:
-        card = flashcards.sample(n=1)
-
+        card_idx = np.random.randint(flashcards.shape[0])
         random_0_1 = np.random.choice([0, 1])
-        side_one = card.iloc[0, random_0_1]
+        card = flashcards.iloc[card_idx, :].T
+
+        side_one = card["dutch_word"]
         with st.expander(side_one):
             st.write(card)
-            st.text_input("Write the answer - to remember")
+            word_spelled = st.text_input("Write the answer - to remember")
+        #            if word_spelled == card["english_word"]:
 
         st.write("## Flashcard set loaded")
         st.write(flashcards)
