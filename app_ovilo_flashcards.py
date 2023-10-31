@@ -6,7 +6,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Ovilo - Language Learning Platform",
-    initial_sidebar_state="expanded",
+    # initial_sidebar_state="expanded",
     menu_items={
         # "Get Help": "https://www.apps.adao.tech"
     },
