@@ -124,8 +124,10 @@ def main():
     with st.sidebar:
         st.image(image=logo_loc, width=300)
         st.markdown("---")
-        if st.button("Play again!"):
-            st.session_state["play_game"] = True
+        st.markdown(
+            """
+Support this app! [*🍺Buy me a beer🍺*](https://donate.stripe.com/dR6bLuabebt2gYE144)"""
+        )
         st.markdown("---")
         tail_cards = st.slider("Tail cards", 1, 200, 50)
         total_cards = st.slider("Total cards", 1, 50, 10)
@@ -144,7 +146,10 @@ def main():
     # Main ###
     st.title("Ovilo - Language Learning Platform")
 
+    if st.button("Play game!"):
+        st.session_state["play_game"] = True
     st.markdown("## Flashcard game")
+
     flashcards = read_flashcards_from_gs()
 
     if st.session_state.get("play_game", False):
@@ -176,9 +181,6 @@ def main():
             st.write("## Words loaded")
             st.data_editor(flashcards)
 
-    else:
-        if st.button("Play game!"):
-            st.session_state["play_game"] = True
     ## Main - Closure
     st.markdown("---")
 
